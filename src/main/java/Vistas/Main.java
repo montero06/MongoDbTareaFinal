@@ -4,8 +4,8 @@
  */
 package Vistas;
 
-import com.joseluu.proyectofinalmongojavi.controlador.DatabaseManager;
-import com.joseluu.proyectofinalmongojavi.entidad.Continente;
+import Controlador.DatabaseManager;
+import Entidad.Continente;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,6 +18,19 @@ public class Main extends javax.swing.JFrame {
 
     DatabaseManager managerDatabase;
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form Main
      */
@@ -26,6 +39,8 @@ public class Main extends javax.swing.JFrame {
         managerDatabase = new DatabaseManager();
         ImageIcon icon = new ImageIcon(getClass().getResource("/img/fotojavi.jpeg"));
         jLabel2.setIcon(icon);
+        getContentPane().setBackground(new java.awt.Color(245, 248, 255));
+        jLabel2.setText("");
     }
 
     /**
@@ -52,11 +67,13 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        setTitle("GeoGestor - Montero");
+
         jLabel2.setText("jLabel2");
 
-        jMenu1.setText("Menus");
+        jMenu1.setText("Panel principal");
 
-        jMenuItem1.setText("Operaciones continentes");
+        jMenuItem1.setText("Gestionar continentes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -64,7 +81,7 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Operaciones Pais");
+        jMenuItem2.setText("Gestionar países");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -72,7 +89,7 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("Consulta");
+        jMenuItem3.setText("Resumen por continente");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -129,10 +146,10 @@ public class Main extends javax.swing.JFrame {
             if (!listaContinente.isEmpty()) {
                 new Paises(this, true).setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Lista vacia error generado");
+                JOptionPane.showMessageDialog(this, "No hay continentes registrados.");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Error con la base de datos");
+            JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos.");
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -142,10 +159,10 @@ public class Main extends javax.swing.JFrame {
             if (!listaContinente.isEmpty()) {
                 new Consultas(this, true).setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Lista vacia error generado");
+                JOptionPane.showMessageDialog(this, "No hay continentes registrados.");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Error con la base de datos");
+            JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos.");
         }
 
         
@@ -186,16 +203,4 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    // End of variables declaration//GEN-END:variables
 }

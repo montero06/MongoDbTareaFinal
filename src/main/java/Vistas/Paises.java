@@ -4,9 +4,9 @@
  */
 package Vistas;
 
-import com.joseluu.proyectofinalmongojavi.controlador.DatabaseManager;
-import com.joseluu.proyectofinalmongojavi.entidad.Continente;
-import com.joseluu.proyectofinalmongojavi.entidad.Pais;
+import Controlador.DatabaseManager;
+import Entidad.Continente;
+import Entidad.Pais;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +17,20 @@ public class Paises extends javax.swing.JDialog {
 
     DatabaseManager managerDatabase;
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAñadirPais;
+    private javax.swing.JButton btnEliminarPais;
+    private javax.swing.JComboBox<String> comboBoxContinentes;
+    private javax.swing.JComboBox<String> comboBoxPaises;
+    private javax.swing.JTextField inputTextNombrePais;
+    private javax.swing.JTextField inputTextNumHabitantes;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form Paises
      */
@@ -24,6 +38,8 @@ public class Paises extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         managerDatabase = new DatabaseManager();
+        setTitle("Gestión de países");
+        getContentPane().setBackground(new java.awt.Color(255, 247, 240));
         this.inicializarComboBoxContinente();
         this.inicializarComboBoxPaises();
     }
@@ -68,9 +84,9 @@ public class Paises extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Añadir paises");
+        jLabel1.setText("Gestión de países");
 
-        btnAñadirPais.setText("Añadir Pais");
+        btnAñadirPais.setText("Guardar país");
         btnAñadirPais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAñadirPaisActionPerformed(evt);
@@ -86,15 +102,15 @@ public class Paises extends javax.swing.JDialog {
 
         comboBoxPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel2.setText("N Habitantes");
+        jLabel2.setText("Nº habitantes");
 
         jLabel3.setText("Nombre Pais");
 
-        jLabel4.setText("Eliminar Pais");
+        jLabel4.setText("Eliminar país");
 
         comboBoxContinentes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnEliminarPais.setText("Eliminar Pais");
+        btnEliminarPais.setText("Quitar país");
         btnEliminarPais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarPaisActionPerformed(evt);
@@ -173,7 +189,7 @@ public class Paises extends javax.swing.JDialog {
 
     private void btnAñadirPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirPaisActionPerformed
         try {
-            String nombrePais = inputTextNombrePais.getText();
+            String nombrePais = inputTextNombrePais.getText().trim();
             int numeroHabitantes = Integer.parseInt(inputTextNumHabitantes.getText());
             String nombreContinente = (String) comboBoxContinentes.getSelectedItem();
 
@@ -188,7 +204,7 @@ public class Paises extends javax.swing.JDialog {
                 if (continente != null) {
 
                     if (nombrePais.contains(" ") || inputTextNumHabitantes.getText().contains(" ")) {
-                        JOptionPane.showMessageDialog(this, "Has añadido espacios no validos quitalos");
+                        JOptionPane.showMessageDialog(this, "No uses espacios al inicio o final en los campos.");
                     } else {
 
                         boolean existe = managerDatabase.getListaPaises().stream()
@@ -204,18 +220,18 @@ public class Paises extends javax.swing.JDialog {
                             this.inicializarComboBoxPaises();
 
                         } else {
-                            JOptionPane.showMessageDialog(this, "Has añadido uno ya existente");
+                            JOptionPane.showMessageDialog(this, "Ese país ya existe en el registro.");
                         }
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "No se encontró el continente.");
+                    JOptionPane.showMessageDialog(this, "No se encontró el país seleccionado.");
                 }
 
                 managerDatabase.closeMongoDatabase();
 
             } else {
-                JOptionPane.showMessageDialog(this, "Error con la database");
+                JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos.");
             }
 
         } catch (NumberFormatException e) {
@@ -243,13 +259,13 @@ public class Paises extends javax.swing.JDialog {
                 managerDatabase.deletePais(pais);
                 this.inicializarComboBoxPaises();
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontró el continente.");
+                JOptionPane.showMessageDialog(this, "No se encontró el país seleccionado.");
             }
 
             managerDatabase.closeMongoDatabase();
 
         } else {
-            JOptionPane.showMessageDialog(this, "Error con la database");
+            JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos.");
         }
     }//GEN-LAST:event_btnEliminarPaisActionPerformed
 
@@ -295,17 +311,4 @@ public class Paises extends javax.swing.JDialog {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAñadirPais;
-    private javax.swing.JButton btnEliminarPais;
-    private javax.swing.JComboBox<String> comboBoxContinentes;
-    private javax.swing.JComboBox<String> comboBoxPaises;
-    private javax.swing.JTextField inputTextNombrePais;
-    private javax.swing.JTextField inputTextNumHabitantes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    // End of variables declaration//GEN-END:variables
 }
