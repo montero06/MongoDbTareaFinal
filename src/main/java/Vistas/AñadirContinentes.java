@@ -4,8 +4,8 @@
  */
 package Vistas;
 
-import com.joseluu.proyectofinalmongojavi.controlador.DatabaseManager;
-import com.joseluu.proyectofinalmongojavi.entidad.Continente;
+import Controlador.DatabaseManager;
+import Entidad.Continente;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -17,6 +17,13 @@ public class AñadirContinentes extends javax.swing.JDialog {
 
     DatabaseManager managerDatabase;
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAñadirContinentes;
+    private javax.swing.JTextField inputTextContinentes;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form AñadirContinentes
      */
@@ -24,6 +31,8 @@ public class AñadirContinentes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         managerDatabase = new DatabaseManager();
+        setTitle("Gestor de continentes");
+        getContentPane().setBackground(new java.awt.Color(241, 250, 242));
     }
 
     /**
@@ -42,9 +51,9 @@ public class AñadirContinentes extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Añadir continentes");
+        jLabel1.setText("Registrar continente");
 
-        btnAñadirContinentes.setText("Añadir continentes");
+        btnAñadirContinentes.setText("Guardar continente");
         btnAñadirContinentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAñadirContinentesActionPerformed(evt);
@@ -99,7 +108,7 @@ public class AñadirContinentes extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAñadirContinentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirContinentesActionPerformed
-        String nombreContinente = inputTextContinentes.getText();
+        String nombreContinente = inputTextContinentes.getText().trim();
 
         if (managerDatabase.runMongoDatabase()) {
             List<Continente> listaContinente = managerDatabase.getListaDeContinentes();
@@ -110,16 +119,16 @@ public class AñadirContinentes extends javax.swing.JDialog {
                     Continente continente = new Continente(nombreContinente);
                     managerDatabase.añadirContinentes(continente);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Has añadido uno ya existente.");
+                    JOptionPane.showMessageDialog(this, "Ese continente ya está registrado.");
 
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "El continente no contiene ningun tipo de texto valido.");
+                JOptionPane.showMessageDialog(this, "Debes escribir un nombre válido para el continente.");
 
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "Error con la database");
+            JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos.");
         }
 
     }//GEN-LAST:event_btnAñadirContinentesActionPerformed
@@ -166,10 +175,4 @@ public class AñadirContinentes extends javax.swing.JDialog {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAñadirContinentes;
-    private javax.swing.JTextField inputTextContinentes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    // End of variables declaration//GEN-END:variables
 }

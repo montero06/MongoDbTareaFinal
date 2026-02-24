@@ -4,8 +4,8 @@
  */
 package Vistas;
 
-import com.joseluu.proyectofinalmongojavi.controlador.DatabaseManager;
-import com.joseluu.proyectofinalmongojavi.entidad.Pais;
+import Controlador.DatabaseManager;
+import Entidad.Pais;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -17,6 +17,16 @@ public class Consultas extends javax.swing.JDialog {
 
     DatabaseManager managerDatabase;
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBoxContinente;
+    private javax.swing.JTextField inputNumeroDeHabitantes;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form Consultas
      */
@@ -24,6 +34,8 @@ public class Consultas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         managerDatabase = new DatabaseManager();
+        setTitle("Resumen por continente");
+        getContentPane().setBackground(new java.awt.Color(247, 246, 255));
         this.inicializarComboBoxContinente();
     }
 
@@ -56,7 +68,7 @@ public class Consultas extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Consultas");
+        jLabel1.setText("Panel de consultas");
 
         comboBoxContinente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxContinente.addItemListener(new java.awt.event.ItemListener() {
@@ -65,9 +77,9 @@ public class Consultas extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Numero de habitantes");
+        jLabel2.setText("Habitantes totales");
 
-        jLabel3.setText("Paises y habitantes");
+        jLabel3.setText("Listado de países");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -153,7 +165,7 @@ public class Consultas extends javax.swing.JDialog {
                             jTextArea1.setText(sb.toString());
                             inputNumeroDeHabitantes.setText(String.valueOf(sumaTotalHabitantes));
                         } else {
-                            JOptionPane.showMessageDialog(this, "Filtro fallido: No hay coincidencias para el ID " + idBuscado);
+                            JOptionPane.showMessageDialog(this, "No hay países asociados a ese continente.");
                         }
                     }
                 }
@@ -206,13 +218,4 @@ public class Consultas extends javax.swing.JDialog {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboBoxContinente;
-    private javax.swing.JTextField inputNumeroDeHabitantes;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    // End of variables declaration//GEN-END:variables
 }
