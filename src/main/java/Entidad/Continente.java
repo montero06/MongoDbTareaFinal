@@ -4,22 +4,27 @@
  */
 package Entidad;
 
-
 public class Continente {
-    private String Nombre;
+
+    private String nombre;
 
     public Continente(String nombre) {
-        this.Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.Nombre = nombre;
+        this.nombre = nombre;
     }
 
-    
-    
+    public String getName() {
+        return nombre;
+    }
+
+    public void setName(String nombre) {
+        this.nombre = nombre;
+    }
 }
